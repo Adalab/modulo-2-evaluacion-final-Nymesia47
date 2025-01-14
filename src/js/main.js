@@ -1,3 +1,6 @@
 'use strict';
+import './search_function';
 
-console.log('>> Ready :)');
+
+
+
