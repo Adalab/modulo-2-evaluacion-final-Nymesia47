@@ -1,4 +1,3 @@
-'use strict';
 
 const searchField = document.querySelector('.js-search-input');
 const searchBtn = document.querySelector('.js-search-btn');
@@ -7,6 +6,17 @@ const favoriteList = document.querySelector('.js-favorite-list');
 let searchRequest = '';
 let animeList = [];
 let favoriteAnime = []; 
+
+//obtengo los datos del LS para saber si pintar favoritos en la lista de favoritos.
+
+const dataFavAnimesLS = localStorage.getItem('favoriteAnime');
+if(dataFavAnimesLS) {
+    favoriteAnime = JSON.parse(dataFavAnimesLS);    
+}
+
+for (const anime of favoriteAnime) {
+    renderAnime(anime, favoriteList);   
+} 
 
 //Pintar los reultado
 
@@ -41,7 +51,6 @@ function renderAnime(anime, list){
     newAnimeTitle.appendChild(textH3);  
 
     newArticle.append(newAnimeImg, newAnimeTitle);
-
 }
 
 //Función de favoritos
@@ -94,7 +103,6 @@ function getDataApi() {
     })
 
 }
-
 //Función de Busqueda
 
 function handleSearch(ev) {
@@ -102,17 +110,4 @@ function handleSearch(ev) {
     searchRequest = searchField.value;
     getDataApi();
 }
-
 searchBtn.addEventListener('click', handleSearch);
-
-////obtengo los datos del LS para saber si pintar favoritos en la lista de favoritos.
-
-const dataFavAnimesLS = localStorage.getItem('favoriteAnime');
-if(dataFavAnimesLS) {
-    favoriteAnime = JSON.parse(dataFavAnimesLS);    
-}
-//favoriteList.innerHTML = '';
-    for (const anime of favoriteAnime) {
-        renderAnime(anime, favoriteList);   
-    } 
-
