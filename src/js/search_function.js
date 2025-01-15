@@ -3,13 +3,17 @@
 const searchField = document.querySelector('.js-search-input');
 const searchBtn = document.querySelector('.js-search-btn');
 const resultList = document.querySelector('.js-result-list');
+const favoriteList = document.querySelector('.js-favorite-list');
 let searchRequest = '';
 let animeList = [];
 
-function renderAnime(anime){
+//Pintar los reultado
+
+function renderAnime(anime, list){
     const newListItem = document.createElement('li');
     newListItem.setAttribute('id', anime.mal_id);
-    resultList.appendChild(newListItem);
+    newListItem.classList.add('js-animeCard');
+    list.appendChild(newListItem);
 
     const newArticle = document.createElement('article');
     newArticle.classList.add('card');
@@ -30,7 +34,44 @@ function renderAnime(anime){
     newAnimeTitle.appendChild(textH3);
 
     newArticle.append(newAnimeImg, newAnimeTitle);
+
 }
+
+//Función de favoritos
+
+let favoriteAnime = []; 
+
+const handleClickFav = (ev) => {
+    const animeClicked = Number(ev.currentTarget.id);
+    
+    const animeSelect = animeList.find((eachAnime) => eachAnime.mal_id === animeClicked);
+    const indexFavSelected = favoriteAnime.findIndex((anime) => anime.mal_id === animeClicked);
+    if (indexFavSelected === -1) {
+        favoriteAnime.push(animeSelect);
+    } else {
+        console.log ('anime already in favorite');
+        
+    }
+
+    favoriteList.innerHTML = '';
+    for (const anime of favoriteAnime) {
+        renderAnime(anime, favoriteList);   
+    } 
+    
+}
+
+
+//Escuchar evento sobre lo LI
+
+const listenerListItem = () => {
+    const allAnimeLi = document.querySelectorAll('.js-animeCard');
+    for (const listItem of allAnimeLi) {
+        listItem.addEventListener('click', handleClickFav);
+    }
+    
+}
+
+//Petición al servidor
 
 function getDataApi() {
     fetch(`https://api.jikan.moe/v4/anime?q=${searchRequest}`)
@@ -38,11 +79,15 @@ function getDataApi() {
     .then(result => {
         animeList = result.data;
         for (const anime of animeList) {
-            renderAnime(anime);
-        }
-        console.log(animeList);
+            renderAnime(anime, resultList);
+        }  
+        
+        listenerListItem();  
     })
+
 }
+
+//Función de Busqueda
 
 function handleSearch(ev) {
     ev.preventDefault();
