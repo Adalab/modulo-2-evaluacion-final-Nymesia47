@@ -49,9 +49,11 @@ const handleClickFav = (ev) => {
     if (indexFavSelected === -1) {
         favoriteAnime.push(animeSelect);
     } else {
-        console.log ('anime already in favorite');
+        console.log ('fa');
         
     }
+
+    localStorage.setItem('favoriteAnime', JSON.stringify(favoriteAnime));
 
     favoriteList.innerHTML = '';
     for (const anime of favoriteAnime) {
