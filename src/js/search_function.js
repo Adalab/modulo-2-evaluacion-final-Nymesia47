@@ -6,6 +6,7 @@ const resultList = document.querySelector('.js-result-list');
 const favoriteList = document.querySelector('.js-favorite-list');
 let searchRequest = '';
 let animeList = [];
+let favoriteAnime = []; 
 
 //Pintar los reultado
 
@@ -16,6 +17,13 @@ function renderAnime(anime, list){
     list.appendChild(newListItem);
 
     const newArticle = document.createElement('article');
+
+    //verificar si el anime está en el array de favorito
+
+    const findFav = favoriteAnime.find(animeFav => animeFav.mal_id === anime.mal_id);
+    if (findFav) {
+        newArticle.classList.add('favorite');
+    }
     newArticle.classList.add('card');
     newListItem.appendChild(newArticle);
 
@@ -27,19 +35,16 @@ function renderAnime(anime, list){
         newAnimeImg.setAttribute('src', anime.images.jpg.image_url);
         newAnimeImg.setAttribute('alt', anime.title);
     }
-    
 
     const newAnimeTitle = document.createElement('h3');
     const textH3 = document.createTextNode(anime.title);
-    newAnimeTitle.appendChild(textH3);
+    newAnimeTitle.appendChild(textH3);  
 
     newArticle.append(newAnimeImg, newAnimeTitle);
 
 }
 
 //Función de favoritos
-
-let favoriteAnime = []; 
 
 const handleClickFav = (ev) => {
     const animeClicked = Number(ev.currentTarget.id);
@@ -98,4 +103,15 @@ function handleSearch(ev) {
 }
 
 searchBtn.addEventListener('click', handleSearch);
+
+////obtengo los datos del LS para saber si pintar favoritos en la lista de favoritos.
+
+const dataFavAnimesLS = localStorage.getItem('favoriteAnime');
+if(dataFavAnimesLS) {
+    favoriteAnime = JSON.parse(dataFavAnimesLS);    
+}
+favoriteList.innerHTML = '';
+    for (const anime of favoriteAnime) {
+        renderAnime(anime, favoriteList);   
+    } 
 
