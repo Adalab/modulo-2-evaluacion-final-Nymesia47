@@ -151,11 +151,12 @@ console.log(favoriteAnime);
 
 function handleDeleteItem (ev) {
     const animeClicked = Number(ev.currentTarget.getAttribute('data-id'));
-    
-    //const animeSelected = favoriteAnime.find((eachAnime) => eachAnime.mal_id === animeClicked);
     const indexFavSelected = favoriteAnime.findIndex((anime) => anime.mal_id === animeClicked);
 
     favoriteAnime.splice(indexFavSelected, 1);
+    localStorage.removeItem('favoriteAnime');
+    localStorage.setItem('favoriteAnime', JSON.stringify(favoriteAnime));
+
     favoriteList.innerHTML = '';
     for (const anime of favoriteAnime) {
         renderFavorites(anime, favoriteList);   
