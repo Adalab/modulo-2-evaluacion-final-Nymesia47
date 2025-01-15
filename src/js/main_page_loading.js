@@ -1,6 +1,7 @@
 
 const searchField = document.querySelector('.js-search-input');
 const searchBtn = document.querySelector('.js-search-btn');
+const resetBtn = document.querySelector('.js-reset-btn');
 const resultList = document.querySelector('.js-result-list');
 const favoriteList = document.querySelector('.js-favorite-list');
 let searchRequest = '';
@@ -174,6 +175,19 @@ function handleDeleteItem (ev) {
 }
 
 listenerListItem('.js-deleteFav-btn', handleDeleteItem);
+
+//Bonus: Botón de reset
+
+function handleResetBtn () {
+    searchRequest = '';
+    animeList = [];
+    favoriteAnime = []; 
+    resultList.innerHTML = '';
+    favoriteList.innerHTML = '';
+    localStorage.removeItem('favoriteAnime');
+}
+
+resetBtn.addEventListener('click', handleResetBtn);
 
 
 
