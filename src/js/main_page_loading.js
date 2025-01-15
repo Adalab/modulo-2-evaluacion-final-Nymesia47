@@ -14,11 +14,19 @@ function renderFavorites (anime, list) {
     const newListItem = document.createElement('li');
     newListItem.setAttribute('id', anime.mal_id);
     newListItem.classList.add('js-favAnimeCard');
+    newListItem.classList.add('favorite-section-card');
     list.appendChild(newListItem);
 
     const newArticle = document.createElement('article');
     newArticle.classList.add('favCard');
-    newListItem.appendChild(newArticle);
+
+    const newDeleteBtn = document.createElement('button');
+    newDeleteBtn.textContent = 'X';
+    newDeleteBtn.classList.add('js-deleteFav-btn');
+    newDeleteBtn.classList.add('favCard-delete');
+    newDeleteBtn.setAttribute('data-id', anime.mal_id);
+
+    newListItem.append(newArticle, newDeleteBtn);
 
     const newAnimeImg = document.createElement('img');
     if(!anime.images.jpg.image_url) {
@@ -33,12 +41,7 @@ function renderFavorites (anime, list) {
     const textH3 = document.createTextNode(anime.title);
     newAnimeTitle.appendChild(textH3);  
 
-    const newDeleteBtn = document.createElement('button');
-    newDeleteBtn.textContent = 'X';
-    newDeleteBtn.classList.add('js-deleteFav-btn');
-    newDeleteBtn.setAttribute('data-id', anime.mal_id);
-
-    newArticle.append(newAnimeImg, newAnimeTitle, newDeleteBtn);
+    newArticle.append(newAnimeImg, newAnimeTitle,);
 
 }
 
