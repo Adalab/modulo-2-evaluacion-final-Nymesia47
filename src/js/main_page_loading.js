@@ -85,7 +85,9 @@ function renderAnime(anime, list){
     newAnimeTitle.appendChild(textH3);  
 
     newArticle.append(newAnimeImg, newAnimeTitle);
+    
 }
+
 
 //Escuchar evento sobre lo LI
 
@@ -108,7 +110,6 @@ function getDataApi() {
         for (const anime of animeList) {
             renderAnime(anime, resultList);
         }  
-        
         listenerListItem('.js-animeCard', handleClickFav);  
     })
 
@@ -123,6 +124,7 @@ function handleSearch(ev) {
 }
 searchBtn.addEventListener('click', handleSearch);
 
+
 //Función de favoritos
 
 const handleClickFav = (ev) => {
@@ -132,9 +134,9 @@ const handleClickFav = (ev) => {
 
     if (indexFavSelected === -1) {
         favoriteAnime.push(animeSelect);
-    } else {
-        console.log ('fa');
         
+    } else {
+        favoriteAnime.splice(indexFavSelected, 1);  
     }
 
     localStorage.setItem('favoriteAnime', JSON.stringify(favoriteAnime));
@@ -143,11 +145,17 @@ const handleClickFav = (ev) => {
     for (const anime of favoriteAnime) {
         renderFavorites(anime, favoriteList);   
     } 
+
+    resultList.innerHTML = '';
+        for (const anime of animeList) {
+            renderAnime(anime, resultList);
+        };
+
+    listenerListItem('.js-animeCard', handleClickFav);  
     
 }
 
 //Bonus: Borrar favoritos
-console.log(favoriteAnime);
 
 function handleDeleteItem (ev) {
     const animeClicked = Number(ev.currentTarget.getAttribute('data-id'));
