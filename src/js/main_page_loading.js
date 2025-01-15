@@ -7,6 +7,40 @@ let searchRequest = '';
 let animeList = [];
 let favoriteAnime = []; 
 
+//Pintar los animes guardado en favoritos
+
+function renderFavorites (anime, list) {
+    const newListItem = document.createElement('li');
+    newListItem.setAttribute('id', anime.mal_id);
+    newListItem.classList.add('js-favAnimeCard');
+    list.appendChild(newListItem);
+
+    const newArticle = document.createElement('article');
+    newArticle.classList.add('favCard');
+    newListItem.appendChild(newArticle);
+
+    const newAnimeImg = document.createElement('img');
+    if(!anime.images.jpg.image_url) {
+        newAnimeImg.setAttribute('src', "https://placehold.co/210x295");
+        newAnimeImg.setAttribute('alt', "placeholder image");
+    } else {
+        newAnimeImg.setAttribute('src', anime.images.jpg.image_url);
+        newAnimeImg.setAttribute('alt', anime.title);
+    }
+
+    const newAnimeTitle = document.createElement('h3');
+    const textH3 = document.createTextNode(anime.title);
+    newAnimeTitle.appendChild(textH3);  
+
+    const newDeleteBtn = document.createElement('button');
+    newDeleteBtn.textContent = 'X';
+    newDeleteBtn.classList.add('js-deleteFav-btn');
+    newDeleteBtn.setAttribute('data-id', anime.mal_id);
+
+    newArticle.append(newAnimeImg, newAnimeTitle, newDeleteBtn);
+
+}
+
 //obtengo los datos del LS para saber si pintar favoritos en la lista de favoritos.
 
 const dataFavAnimesLS = localStorage.getItem('favoriteAnime');
@@ -15,10 +49,10 @@ if(dataFavAnimesLS) {
 }
 
 for (const anime of favoriteAnime) {
-    renderAnime(anime, favoriteList);   
+    renderFavorites(anime, favoriteList);   
 } 
 
-//Pintar los reultado
+//Pintar los reultado de la busqueda
 
 function renderAnime(anime, list){
     const newListItem = document.createElement('li');
@@ -53,36 +87,12 @@ function renderAnime(anime, list){
     newArticle.append(newAnimeImg, newAnimeTitle);
 }
 
-//Función de favoritos
-
-const handleClickFav = (ev) => {
-    const animeClicked = Number(ev.currentTarget.id);
-    
-    const animeSelect = animeList.find((eachAnime) => eachAnime.mal_id === animeClicked);
-    const indexFavSelected = favoriteAnime.findIndex((anime) => anime.mal_id === animeClicked);
-    if (indexFavSelected === -1) {
-        favoriteAnime.push(animeSelect);
-    } else {
-        console.log ('fa');
-        
-    }
-
-    localStorage.setItem('favoriteAnime', JSON.stringify(favoriteAnime));
-
-    favoriteList.innerHTML = '';
-    for (const anime of favoriteAnime) {
-        renderAnime(anime, favoriteList);   
-    } 
-    
-}
-
-
 //Escuchar evento sobre lo LI
 
-const listenerListItem = () => {
-    const allAnimeLi = document.querySelectorAll('.js-animeCard');
-    for (const listItem of allAnimeLi) {
-        listItem.addEventListener('click', handleClickFav);
+const listenerListItem = ( className, handleFunction) => {
+    const allAnime = document.querySelectorAll(className);
+    for (const Item of allAnime) {
+        Item.addEventListener('click', handleFunction);
     }
     
 }
@@ -99,10 +109,11 @@ function getDataApi() {
             renderAnime(anime, resultList);
         }  
         
-        listenerListItem();  
+        listenerListItem('.js-animeCard', handleClickFav);  
     })
 
 }
+
 //Función de Busqueda
 
 function handleSearch(ev) {
@@ -111,3 +122,50 @@ function handleSearch(ev) {
     getDataApi();
 }
 searchBtn.addEventListener('click', handleSearch);
+
+//Función de favoritos
+
+const handleClickFav = (ev) => {
+    const animeClicked = Number(ev.currentTarget.id);
+    const animeSelect = animeList.find((eachAnime) => eachAnime.mal_id === animeClicked);
+    const indexFavSelected = favoriteAnime.findIndex((anime) => anime.mal_id === animeClicked);
+
+    if (indexFavSelected === -1) {
+        favoriteAnime.push(animeSelect);
+    } else {
+        console.log ('fa');
+        
+    }
+
+    localStorage.setItem('favoriteAnime', JSON.stringify(favoriteAnime));
+
+    favoriteList.innerHTML = '';
+    for (const anime of favoriteAnime) {
+        renderFavorites(anime, favoriteList);   
+    } 
+    
+}
+
+//Bonus: Borrar favoritos
+console.log(favoriteAnime);
+
+function handleDeleteItem (ev) {
+    const animeClicked = Number(ev.currentTarget.getAttribute('data-id'));
+    
+    //const animeSelected = favoriteAnime.find((eachAnime) => eachAnime.mal_id === animeClicked);
+    const indexFavSelected = favoriteAnime.findIndex((anime) => anime.mal_id === animeClicked);
+
+    favoriteAnime.splice(indexFavSelected, 1);
+    favoriteList.innerHTML = '';
+    for (const anime of favoriteAnime) {
+        renderFavorites(anime, favoriteList);   
+    } 
+    listenerListItem('.js-deleteFav-btn', handleDeleteItem);
+
+}
+
+listenerListItem('.js-deleteFav-btn', handleDeleteItem);
+
+
+
+
