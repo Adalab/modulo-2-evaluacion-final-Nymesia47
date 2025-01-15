@@ -30,7 +30,7 @@ function renderFavorites (anime, list) {
 
     const newAnimeImg = document.createElement('img');
     if(!anime.images.jpg.image_url) {
-        newAnimeImg.setAttribute('src', "https://placehold.co/210x295");
+        newAnimeImg.setAttribute('src', "https://placehold.co/60x86");
         newAnimeImg.setAttribute('alt', "placeholder image");
     } else {
         newAnimeImg.setAttribute('src', anime.images.jpg.image_url);
@@ -182,6 +182,7 @@ listenerListItem('.js-deleteFav-btn', handleDeleteItem);
 //Bonus: Botón de reset
 
 function handleResetBtn () {
+    searchField.value = '';
     searchRequest = '';
     animeList = [];
     favoriteAnime = []; 

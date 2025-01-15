@@ -1,4 +1,9 @@
 .section-title {
     font-family: $font-main;
-    font-weight: 200;
+    font-weight: 600;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
 }
