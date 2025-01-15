@@ -1,0 +1,31 @@
+h1 {
+    color: lightseagreen;
+    font-weight: 600;
+}
+
+.search-field {
+    margin-top: 30px;
+    margin-bottom: 50px;
+
+    &-input {
+        border: 1px, solid, lightseagreen;
+        font-family: $font-main;
+        border-radius: 4px;
+        width: 40%;
+        background-color: black;
+        color: white;
+        padding: 5px;
+    }
+
+    &-btn {
+        background-color: lightseagreen;
+        color: white;
+        font-family: $font-main;
+        padding: 5px;
+        margin: 5px;
+        width: 60px;
+        border-radius: 5px;
+        border: none;
+    }
+}
+
