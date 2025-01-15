@@ -81,6 +81,7 @@ const listenerListItem = () => {
 //Petición al servidor
 
 function getDataApi() {
+    resultList.innerHTML = '';
     fetch(`https://api.jikan.moe/v4/anime?q=${searchRequest}`)
     .then(resp => resp.json())
     .then(result => {
@@ -110,7 +111,7 @@ const dataFavAnimesLS = localStorage.getItem('favoriteAnime');
 if(dataFavAnimesLS) {
     favoriteAnime = JSON.parse(dataFavAnimesLS);    
 }
-favoriteList.innerHTML = '';
+//favoriteList.innerHTML = '';
     for (const anime of favoriteAnime) {
         renderAnime(anime, favoriteList);   
     } 
