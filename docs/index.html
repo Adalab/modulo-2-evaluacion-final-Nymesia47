@@ -1,69 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Adalab Web Starter Kit</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>modulo-2-evaluacion-final-Nymesia47</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  
+  <script type="module" crossorigin src="./index.js"></script>
+  <link rel="modulepreload" crossorigin href="./js/main.js">
+  <link rel="stylesheet" href="./assets/index-715ae5f3.css">
+</head>
+
+<body>
+  <header>
+    <h1>Buscador de Series de Anime</h1>
+    <section class="search-field">
+      <input type="text" class="js-search-input search-field-input" placeholder="Busca un título" value=""/>
+      <button class="js-search-btn search-field-btn">Buscar</button>
+      <button class="js-reset-btn search-field-btn">Reset</button>
+    </section>
     
-    <link rel="icon" href="./images/favicon.png" />
-    <link rel="stylesheet" href="./assets/main-62015576.css">
-  </head>
+  </header>
+  
+  <main>
+    <aside class="favorite-section">
+      <h2 class="section-title">Series Favoritas</h2>
+      <button class="js-reset-favorite-btn favorite-btn">Borrar Todo</button>
+      <ul class="js-favorite-list favorite-section-list"></ul>
+    </aside>
+    <section class="result-section">
+      <h2 class="section-title">Resultados</h2>
+      <ul class="js-result-list result-section-list">
+      </ul>
+    </section>
+    
+    
+  </main>
 
-  <body>
-    <div class="page">
-      <header class="page__header">
-  <img src="./images/logo-adalab.png" alt="Adalab">
-  <h1>Bienvenidos a Adalab</h1>
-</header>
 
-      <main class="page__main">
-  <h2>Este es el starter kit de Adalab</h2>
-  <p>Lo usamos para aprender:</p>
-  <ul class="main__list">
-    <li>Sass</li>
-    <li>HTML partials</li>
-    <li>Gulp</li>
-    <li>y muchas cosas más</li>
-  </ul>
-  <p>Si quieres saber cúales son las rutas correctas para:</p>
-  <ul class="main__list">
-    <li>
-      una <code class="code">&lt;img /&gt;</code> mira el fichero
-      <code class="code">./src/html/partials/header.html</code>.
-    </li>
-    <li>
-      y para un <code class="code">background-image</code> mira el fichero
-      <code class="code">./src/html/scss/layout/_page.scss</code>.
-    </li>
-  </ul>
-  <p>
-    Si quieres saber cómo usar un partial HTML dentro de otro partial, busca en la carperta
-    <code class="code">./src/html/index.html</code> y
-    <code class="code">./src/html/partials/main.html</code>, y verás cómo estamos creando estos
-    enlaces:
-  </p>
-  <ul class="main__list">
-    <li>
-      <a class="link__adalab" href="https://adalab.es">Adalab</a>
 
-    </li>
-    <li>
-      <a class="{=$aClass}" href="./more-info.html">Más info del starter kit</a>
+  
+</body>
 
-    </li>
-  </ul>
-</main>
-
-      <footer class="page__footer">
-  <small>
-    &copy; Todos los derechos reservados
-    <a class="link__adalab" href="https://adalab.es">Adalab</a>
-
-  </small>
-</footer>
-
-    </div>
-    <script src="./js/main.js"></script>
-  </body>
 </html>
