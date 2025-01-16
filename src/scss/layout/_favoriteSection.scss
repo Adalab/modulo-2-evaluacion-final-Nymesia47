@@ -3,11 +3,15 @@
     width: 30%;
     border-radius: 5px;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     
 
     & h2 {
         background-color: pink;
+        width: 100%;
         text-align: center;
         padding: 3px;    
     }
@@ -19,6 +23,18 @@
     }
 
 
+}
+
+.favorite-btn {
+    background-color: pink;
+    color: black;
+    font-family: $font-main;
+    padding: 5px;
+    margin: 10px;
+    width: 80px;
+    border-radius: 5px;
+    border: none;
+    align-self: flex-end;
 }
 
 .favCard {
