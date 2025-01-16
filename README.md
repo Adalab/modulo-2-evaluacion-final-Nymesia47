@@ -1,125 +1,93 @@
 ![Adalab](https://beta.adalab.es/resources/images/adalab-logo-155x61-bg-white.png)
 
-# Adalab web starter kit
+# modulo-2-Evaluacion Final -Gabriella Calvano (Nymesia47)
 
-Ahoy! Este es nuestro Starter Kit creado en **node y vite**. ¿Y qué es un Starter kit? Pues es una **plantilla de proyecto con funcionalidades preinstaladas y preconfiguradas**.
+Final project of the Adalab bootcamp, second module. The goal was to create a web application that allows users to search for animes, view search results, and save their favorite animes in local storage. The app features a dynamic interface with the ability to select and deselect animes for a favorites list.
 
-Este Kit incluye un motor de plantillas HTML, el preprocesador SASS y un servidor local y muchas cosas más. El Kit nos ayuda a trabajar más cómodamente, nos automatiza tareas.
+## Basic requirements:
 
-En el Kit hay 3 tipos de ficheros y carpetas:
+- A search field (text input) and a button to search for anime titles.
+- A list to display the search results, showing an image and the title of each anime.
 
-- Los ficheros que están sueltos en la raíz del repositorio, como vite.config.js, package.json... Son la configuración del proyecto y no necesitamos modificarlos (excepto este README.md, para describir tu proyecto).
-- La carpeta `src/`: son los ficheros de nuestra página web, como HTML, CSS, JS...
-- La carpeta `public/`, que tiene fichero estáticos como imágenes, fuentes, favicon, librerías de JavaScript antiguas (jQuery, ...)
-- Y la carpeta `docs/`, que es generada automáticamente cuando arrancamos el proyecto. El Kit lee los ficheros que hay dentro de `src/` y `public/`, los procesa y los genera dentro de `public/` y `docs/`.
+## JS requirement
 
-## Guía de inicio rápido
+1. **Search Function:**
 
-> **NOTA:** Necesitas tener instalado [Node JS](https://nodejs.org/) con una versión superior a la 14 para trabajar con este Starter Kit:
+   - When the search button is clicked, a request is sent to the API `https://docs.api.jikan.moe/` to retrieve the search results.
+   - The results are rendered in the list, displaying the anime image and title.
 
-### Pasos a seguir cada vez que queremos arrancar un proyecto desde cero:
+2. **Image Placeholder:**
 
-1. **Crea tu propio repositorio.**
-1. Descarga este **Starter kit desde GitHub**.
-   - No recomendamos que clones este repo ya que no podrás añadir commits.
-1. **Copia todos los ficheros** de este Starter kit en la carpeta raíz de tu repositorio.
-   - Recuerda que debes copiar **también los ficheros ocultos** que comienzan por un punto.
-   - Si has decidido clonar este repo, no debes copiar la carpeta `.git`. Si lo haces estarás machacando tu propio repositorio.
-1. **Abre una terminal** en la carpeta raíz de tu repositorio.
-1. **Instala las dependencias** locales ejecutando en la terminal el comando:
+   - If an anime image URL is `https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png`, substitute it with a placeholder image.
 
-```bash
-npm install
-```
+3. **Save to Favorite:**
 
-### Pasos para arrancar el proyecto:
+   - Clicking on a list item highlights it and adds it to the favorites section.
+   - Saved items persist across searches and are displayed in the favorites section.
 
-Una vez hemos instalado las dependencias, vamos a arrancar el proyecto. **El proyecto hay que arrancarlo cada vez que te pongas a programar.** Para ello ejecuta el comando:
+4. **Local Storage:**
+   - Save favorite items in local storage so that they persist after page reloads.
 
-```bash
-npm run dev
-```
+## Bonus Requirements
 
-Este comando:
+1. **Delete Favorite Anime:**
 
-- **Abre una ventana de Chrome y muestra tu página web**, al igual que hace el plugin de VS Code Live Server (Go live).
-- También **observa** todos los ficheros que hay dentro de la carpeta `src/`, para que cada vez que modifiques un fichero **refresca tu página en Chrome**.
-- También **procesa los ficheros** HTML, SASS / CSS y JS. Por ejemplo:
-   - Convierte los ficheros SASS en CSS.
-   - Combina los diferentes ficheros de HTML y los agrupa en uno o varios ficheros HTML.
+   - Clicking the delete button removes the item from the favorites list and from local storage.
 
-Después de ejecutar `npm run dev` ya puedes empezar a editar todos los ficheros que están dentro de la carpeta `src/` y programar cómodamente.
+2. **Toggle Favorite Status:**
 
-### Pasos para publicar el proyecto en GitHub Pages:
+   - Clicking on an item in the result list add/removes it from favorites.
 
-Para generar tu página para producción ejecuta el comando:
+3. **Highlight Saved Items:**
 
-```bash
-npm run build
-```
+   - On a new search, items previously saved in the favorites list should be highlighted in the result list.
 
-Y a continuación:
+4. **Delete All Favorites:**
 
-1. Sube a tu repo la carpeta `docs/` que se te acaba de generar.
-1. Entra en la pestaña `settings` de tu repo.
-1. Y en el apartado de GitHub Pages activa la opción **master branch /docs folder**.
-1. Y ya estaría!!!
+   - Create a "Delete All" button that removes all favorite items from both the list and local storage.
 
-Además, los comandos:
+5. **Reset Button:**
+   - Create a "Reset" button that clears all search results, removes all favorite items, and clears the local storage, resetting the page to its initial state.
 
-```bash
-npm run push-docs
-```
-o
+## Bonus requirements:
 
-```bash
-npm run deploy
-```
+1. Delete favorite anime: On delete button click remove item from the favorite list and from the localStorage.
+2. On click on the item in the result list, add or remove the item from the favorite list.
+3. On new search, saved item in the favorite list appear highlighted.
+4. Create a delete all button for the favorite list that on click will remove all items from the list and from the localStorage.
+5. Create a Reset button for the page that on clcick will reset the page to its initial state, removing all favorite items and search results and clearing the localStorage.
 
-son un atajo que nos genera la versión de producción y hace push de la carpeta `docs/` del tirón. Te recomendamos ver el fichero `package.json` para aprender cómo funciona.
-<!--
-## Flujo de archivos con Gulp
+## Project Execution
 
-Estas tareas de Gulp producen el siguiente flujo de archivos:
+The page is divided into three sections:
 
-![Gulp flow](./gulp-flow.png)
+- **Header:** Contains the search input field and the search button.
+- **Favorite Section:** Displays the user's favorite animes.
+- **Result Section:** Shows the search results.
 
-## `gulpfile.js` y `config.json`
+I used the `fetch` function to retrieve data from the API and a separate function to render the results in the result list. Each result item has an event listener that allows users to click and add the anime to the favorites list, which is saved in an array and in local storage. A function iterates through the array to render the saved favorites in the favorite section.
 
-Nuestro **gulpfile.js** usa el fichero `config.json` de configuración con las rutas de los archivos a generar / observar.
+### Key Functions
 
-De esta manera separarmos las acciones que están en `gulpfile.js` de la configuración de las acciones que están en `config.json`.
--->
-## Estructura de carpetas
+- `getDataApi()`: Fetches anime data from the API.
+- `renderAnime()`: Renders search results in the result list.
+- `handleClickFav()`: Adds/removes an item from the favorites list and local storage.
 
-La estructura de carpetas tiene esta pinta:
+## Tools Used
 
-```
-src
- ├─ api // los ficheros de esta carpeta se copian en public/api/
- |  └─ data.json
- ├─ images
- |  └─ logo.jpg
- ├─ js // los ficheros de esta carpeta se concatenan en el fichero main.js y este se guarda en public/main.js
- |  ├─ main.js
- |  └─ events.js
- ├─ scss
- |  ├─ components
- |  ├─ core
- |  ├─ layout
- |  └─ pages
- └─ html
-    └─ partials
-```
+- **Adalab Starter Kit:** The project starter template provided by Adalab.
+- **Node.js:** JavaScript runtime for building the application.
+- **Sass:** Preprocessor for writing clean and manageable CSS.
+- **Vite:** A modern development server and bundler for fast builds and reactivity.
 
-> **NOTA:** Los partials de HTML y SASS del proyecto son orientativos. Te recomendamos usar los que quieras, y borrar los que no uses.
-<!--
-## Vídeotutoriales del Starter kit
+## License
 
-- [Qué es, trabajar con la versión de desarrollo y rutas relativas](https://www.youtube.com/watch?v=XwvhXvBijos)
-- [Migración de un proyecto, trabajar con la versión de producción y GitHub Pages](https://www.youtube.com/watch?v=qqGClcgt9Uc)
-- [Motor de plantillas](https://www.youtube.com/watch?v=4GwXOJ045Zg)
--->
-## Falta algo?
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Echas de menos que el kit haga algo en concreto? Pidelo sin problema a través de las issues o si te animas a mejorarlo mándanos un PR :)
+## Contact
+
+For any questions or suggestions, feel free to reach out:
+
+- **Maintainer:** Gabriella Calvano
+- **Email:** [gabcalvano@gmail.com](mailto:gabcalvano@gmail.com)
+- **GitHub:** [Nymesia47](https://github.com/Nymesia47)
