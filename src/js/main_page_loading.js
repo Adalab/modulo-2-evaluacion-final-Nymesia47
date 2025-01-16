@@ -2,6 +2,7 @@
 const searchField = document.querySelector('.js-search-input');
 const searchBtn = document.querySelector('.js-search-btn');
 const resetBtn = document.querySelector('.js-reset-btn');
+const resetFavBtn = document.querySelector('.js-reset-favorite-btn');
 const resultList = document.querySelector('.js-result-list');
 const favoriteList = document.querySelector('.js-favorite-list');
 let searchRequest = '';
@@ -119,7 +120,7 @@ function getDataApi() {
 
 }
 
-//Función de Busqueda
+//Busqueda anime
 
 function handleSearch(ev) {
     ev.preventDefault();
@@ -129,7 +130,7 @@ function handleSearch(ev) {
 searchBtn.addEventListener('click', handleSearch);
 
 
-//Función de favoritos
+//Guardar/quitar anime favoritos en la lista de favoritos
 
 const handleClickFav = (ev) => {
     const animeClicked = Number(ev.currentTarget.id);
@@ -155,7 +156,8 @@ const handleClickFav = (ev) => {
             renderAnime(anime, resultList);
         };
 
-    listenerListItem('.js-animeCard', handleClickFav);  
+    listenerListItem('.js-animeCard', handleClickFav); 
+    listenerListItem('.js-deleteFav-btn', handleDeleteItem); 
     
 }
 
@@ -192,6 +194,21 @@ function handleResetBtn () {
 }
 
 resetBtn.addEventListener('click', handleResetBtn);
+
+//Borrar todos los favoritos de la lista de favoritos
+
+function handleClickDeleteall () {
+    favoriteAnime = []; 
+    favoriteList.innerHTML = '';
+    localStorage.removeItem('favoriteAnime');
+    resultList.innerHTML = '';
+        for (const anime of animeList) {
+            renderAnime(anime, resultList);
+        };
+        listenerListItem('.js-animeCard', handleClickFav); 
+}
+
+resetFavBtn.addEventListener('click', handleClickDeleteall);
 
 
 
