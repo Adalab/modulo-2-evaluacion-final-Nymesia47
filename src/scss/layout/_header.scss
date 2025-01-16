@@ -11,10 +11,14 @@ h1 {
         border: 1px, solid, lightseagreen;
         font-family: $font-main;
         border-radius: 4px;
-        width: 40%;
+        width: 55%;
         background-color: black;
         color: white;
         padding: 5px;
+
+        @media (min-width : 768px) {
+            width: 40%;
+        }
     }
 
     &-btn {

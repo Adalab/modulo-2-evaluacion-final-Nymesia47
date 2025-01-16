@@ -6,4 +6,10 @@
 main {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    gap: 20px;
+
+    @media (min-width : 768px) {
+        flex-direction: row;
+    }
 }

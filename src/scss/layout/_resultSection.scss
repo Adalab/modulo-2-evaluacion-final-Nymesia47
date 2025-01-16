@@ -1,9 +1,13 @@
 .result-section {
     border: 1px solid white;
-    width: 65%;
+    width: 100%;
     border-radius: 5px;
     height: 100vh;
     overflow: auto;
+
+    @media (min-width : 768px) {
+        width: 65%;
+    }
     
     
 
