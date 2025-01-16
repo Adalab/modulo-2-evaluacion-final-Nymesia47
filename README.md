@@ -34,7 +34,7 @@ Final project of the Adalab bootcamp, second module. The goal was to create a we
 
    - Clicking the delete button removes the item from the favorites list and from local storage.
 
-2. **Toggle Favorite Status:**
+2. **Add/Remove Item From Favorites:**
 
    - Clicking on an item in the result list add/removes it from favorites.
 
