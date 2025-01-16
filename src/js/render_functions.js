@@ -21,7 +21,7 @@ function renderFavorites (anime, list) {
     newListItem.append(newArticle, newDeleteBtn);
 
     const newAnimeImg = document.createElement('img');
-    if(!anime.images.jpg.image_url) {
+    if(anime.images.jpg.image_url === 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png') {
         newAnimeImg.setAttribute('src', "https://placehold.co/60x86");
         newAnimeImg.setAttribute('alt', "placeholder image");
     } else {
@@ -57,7 +57,7 @@ function renderAnime(anime, list){
     newListItem.appendChild(newArticle);
 
     const newAnimeImg = document.createElement('img');
-    if(!anime.images.jpg.image_url) {
+    if(anime.images.jpg.image_url === 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png') {
         newAnimeImg.setAttribute('src', "https://placehold.co/210x295");
         newAnimeImg.setAttribute('alt', "placeholder image");
     } else {
