@@ -69,6 +69,35 @@ function renderAnime(anime, list){
     const textH3 = document.createTextNode(anime.title);
     newAnimeTitle.appendChild(textH3);  
 
-    newArticle.append(newAnimeImg, newAnimeTitle);
+    const newType = document.createElement('p');
+    let textP = '';
+    if (anime.type === 'Special') {
+        textP = document.createTextNode('Historia Especial');
+    } else {
+        textP = document.createTextNode(anime.type);
+    }
+    newType.appendChild(textP);
+    
+
+    newArticle.append(newAnimeImg, newAnimeTitle, newType);
     
 }
+
+
+/*
+crear rama
+modificar lista resultado vamos a poner el type de la serie.
+Si aparece la palabra special e el type tambien tiene que salir el texto historia especial.
+
+al clicar en la tarjeta de resultado tiene que aparecer en la consola el titulo del resultado y no tiene que aparecer como favorito.
+
+
+1.crear los elemento html
+2.recoger el valor de type. anime.type
+3. comprobar si tiene la palabra special
+pintarlo en el elemeto
+
+
+*/
+
+

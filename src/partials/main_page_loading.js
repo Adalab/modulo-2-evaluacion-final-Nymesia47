@@ -32,7 +32,7 @@ function getDataApi() {
         for (const anime of animeList) {
             renderAnime(anime, resultList);
         }  
-        listenerListItem('.js-animeCard', handleClickFav);  
+        listenerListItem('.js-animeCard', handleClickConsoleLog);  
     })
 
 }
@@ -87,6 +87,26 @@ const handleClickFav = (ev) => {
     
 }
 
+
+/*
+crear rama
+modificar lista resultado vamos a poner el type de la serie.
+Si aparece la palabra special e el type tambien tiene que salir el texto historia especial.
+
+al clicar en la tarjeta de resultado tiene que aparecer en la consola el titulo del resultado y no tiene que aparecer como favorito.
+
+
+*/
+
+function handleClickConsoleLog (ev) {
+    const animeClicked = Number(ev.currentTarget.id);
+    const animeSelect = animeList.find((eachAnime) => eachAnime.mal_id === animeClicked);
+
+    let animeTitle = '';
+
+    console.log(animeSelect.title);
+
+}
 
 
 
